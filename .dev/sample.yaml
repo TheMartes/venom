@@ -1,0 +1,13 @@
+---
+kind: github.com/themartes/dotfiles
+
+required: # pkgs that needs to be required
+    - git
+
+settings:
+    git:
+        - store-credentials
+    custom:
+        - "manual add" # some manual commands to run
+
+scripts:
