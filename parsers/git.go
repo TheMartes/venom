@@ -4,20 +4,22 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+
+	"github.com/themartes/venom/dictionary"
 )
 
 func ParseGit(cmds []string) {
 	for _, c := range cmds {
 		var cmd *exec.Cmd
 
-		// TODO: move to some sort of dictionary??
-		switch c {
-		case "store-credentials":
-			cmd = exec.Command("git", "config", "--global", "credential.helper", "store")
+		cmd, err := dictionary.GetGitCommand(c)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "%v\n", err)
+			os.Exit(1)
 		}
 
 		// we don't care about output
-		_, err := cmd.CombinedOutput()
+		_, err = cmd.CombinedOutput()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%v\n", err)
 			os.Exit(1)

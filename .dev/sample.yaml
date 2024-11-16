@@ -7,6 +7,7 @@ required: # pkgs that needs to be required
 settings:
     git:
         - store-credentials
+        - something
     custom:
         - "manual add" # some manual commands to run
 
